@@ -1,0 +1,4 @@
+2015-12-03 02:12:26: 172.31.217.135: config t ; interface Ethernet1/3 ; switchport access vlan 31
+2015-12-03 02:12:26: 172.31.217.135: config t ; interface Ethernet1/3 ; description Configured by NX-API
+2015-12-03 02:12:27: 172.31.217.135: config t ; interface Ethernet1/4 ; switchport access vlan 31
+2015-12-03 02:12:27: 172.31.217.135: config t ; interface Ethernet1/4 ; description Configured by NX-API
