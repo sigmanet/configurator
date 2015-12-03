@@ -16,21 +16,30 @@ def get_switches():
     '''
     This returns a dictionary of switch info to be presented to user.
     '''
-    sw_dict = {"switches": [{"hostname": "N9K1","ip_addr": "172.31.217.133","model": "Nexus 9396"},{"hostname": "N9K2","ip_addr": "172.31.217.133", "model": "Nexus 9396"},{"hostname": "N9K3","ip_addr": "172.31.217.133","model": "Nexus 9396"},{"hostname": "N9K4", "ip_addr":"172.31.217.133", "model": "Nexus 9396"}]}
+    sw_dict = {"switches": [{"hostname": "N9K1", "ip_addr": "172.31.217.133", "model": "Nexus 9396"},
+                            {"hostname": "N9K2", "ip_addr": "172.31.217.134", "model": "Nexus 9396"},
+                            {"hostname": "N9K3", "ip_addr": "172.31.217.135", "model": "Nexus 9396"},
+                            {"hostname": "N9K4", "ip_addr": "172.31.217.136", "model": "Nexus 9396"}]}
     return sw_dict
 
 def get_switchname(switch_ip):
+    """
+    This does a reverse lookup of name for switch with given IP
+
+    params:
+    switch_ip (string): ip address of switch
+    """
     sw_dict = get_switches()
     for switch in sw_dict['switches']:
-        print switch
-        # if v == switch_ip:
-        #     print v
+        if switch['ip_addr'] == switch_ip:
+            switch_hostname = switch['hostname']
+    return switch_hostname
 
 def get_intfs(switch_ip):
-    '''
+    """
     This connects to the chosen switch and gets all of the ports. and vlans.
     This is filtered to access ports only.
-    '''
+    """
     switch_user = 'admin'
     switch_pw = 'cisco123'
 
@@ -90,9 +99,12 @@ def show_run(switch_ip, intf_id):
     command = switch.show('show interface ' + intf_id)
     show_dict = xmltodict.parse(command[1])
     results = show_dict['ins_api']['outputs']['output']['body']['TABLE_interface']['ROW_interface']
-    desc = results['desc']
+    if 'desc' in results:
+        desc = 'description ' + results['desc']
+    else:
+        desc = "no description"
     # Create NXOS formatted text to return
-    config_text = 'interface ' + intf_id + '\n  description ' + desc + '\n  switchport mode ' + oper_mode + '\n  switchport access vlan ' + access_vlan + '\n!\n'
+    config_text = 'interface ' + intf_id + '\n  ' + desc + '\n  switchport mode ' + oper_mode + '\n  switchport access vlan ' + access_vlan + '\n!\n'
     return config_text
 
 def log_change(log_str):
@@ -142,6 +154,7 @@ def conf_intfs(conf_dict):
     switch_user = 'admin'
     switch_pw = 'cisco123'
     switch_ip = conf_dict['switch_ip']
+    switch_name = get_switchname(switch_ip)
     # Connect to switch
     switch = Device(ip=switch_ip, username=switch_user, password=switch_pw)
     switch.open()
@@ -156,8 +169,8 @@ def conf_intfs(conf_dict):
         config_changes_list += show_run(switch_ip, conf_dict['intf_id'][item])
         # Log cli_conf call to local file
         logtime = get_time()
-        log_change(logtime + ': ' + switch_ip + ': ' + change_vlan + '\n')
-        log_change(logtime + ': ' + switch_ip + ': ' + change_desc + '\n')
+        log_change(logtime + ': ' + switch_name + '(' + switch_user + '): ' + change_vlan + '\n')
+        log_change(logtime + ': ' + switch_name + '(' + switch_user + '): ' + change_desc + '\n')
     return config_changes_list
 
 def main():
