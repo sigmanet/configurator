@@ -9,6 +9,14 @@
 		<script src="/static/js/jquery.min.js"></script>
 		<script src="/static/js/bootstrap.min.js"></script>
     		<script src="/static/js/jquery.bootstrap-duallistbox.min.js"></script>
+		<script>
+			function getParameterByName(name) {
+   				 name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+				var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+				results = regex.exec(location.search);
+    				return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+				}
+		</script>
 	</head>
 	<body>
 
@@ -21,7 +29,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <span class="navbar-brand">SIGMAnet Nexus Config Tool</a>
+          <span class="navbar-brand"><span style="color:#white">SIGMA</span><span style="color:#00a4e4">net</span> Switch Config Tool</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">

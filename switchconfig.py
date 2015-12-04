@@ -104,7 +104,8 @@ def show_run(switch_ip, intf_id):
     else:
         desc = "no description"
     # Create NXOS formatted text to return
-    config_text = 'interface ' + intf_id + '\n  ' + desc + '\n  switchport mode ' + oper_mode + '\n  switchport access vlan ' + access_vlan + '\n!\n'
+    config_text = 'interface ' + intf_id + '\n  ' + desc + '\n  switchport mode ' + oper_mode + \
+                  '\n  switchport access vlan ' + access_vlan + '\n!\n'
     return config_text
 
 def log_change(log_str):
@@ -175,15 +176,14 @@ def conf_intfs(conf_dict):
 
 def main():
 
-    switch_dict = get_switches()
-
-    intfs = get_intfs('172.31.217.135')
-
-    vlans = get_vlans('172.31.217.135')
-
-    conf_in = {"switch_ip": "172.31.217.135", "intf_desc": "Configured by NX-API", "intf_id": ["Ethernet1/3", "Ethernet1/4"],"vlan_id": "31"}
-    output = conf_intfs(conf_in)
-    print output
+    # DEBUGGING:
+    # switch_dict = get_switches()
+    # intfs = get_intfs('172.31.217.135')
+    # vlans = get_vlans('172.31.217.135')
+    # conf_in = {"switch_ip": "172.31.217.135", "intf_desc": "Configured by NX-API", "intf_id": ["Ethernet1/3", "Ethernet1/4"],"vlan_id": "31"}
+    # output = conf_intfs(conf_in)
+    # print output
+    pass
 
 if __name__ == "__main__":
     main()
