@@ -13,18 +13,25 @@ from switchconfig import *
 import json
 
 
-
 print "\n" * 40
+
+
 print "==============================================================="
 print "Thank you for using the configurator."
-print "CLI Menu Written by Jeffrey Liu and Kevin Echols"
+print "CLI Menu Written by Jeffrey Liu, Kevin Echols"
 print "===============================================================\n"
 
-print 'Please choose what you would like to do:\n'
-
-print '
 
 
+
+
+def print_log():
+	log = get_log()
+	for line in log:
+		print line
+
+		
+		
 switches = switchconfig.get_switches()
 switch_dict = {}
 
@@ -37,58 +44,92 @@ def write_switch_dict():
 
 write_switch_dict()
 
+
+
 def print_switches():
 	iterations = 0
 	for switch in switches['switches']:
 		iterations += 1
 		print str(iterations) + '.)  ' + switch['hostname'] + '     IP: ' + switch['ip_addr'] + '     Model: ' + switch ['model']
 
-		
-print_switches()
-print "\nPlease enter a number.\n"
-switch_num = raw_input(">>>>>>>>>>>")
 
-
-
-selected_switch_ip = switch_dict[switch_num]
-def selected_switch_name():
+def selected_switch_name(switch_num):
 	for switch in switches['switches']:
-		if switch['ip_addr'] == selected_switch_ip:
+		if switch['ip_addr'] == switch_dict[switch_num]:
 			return switch['hostname']
 
 
-print "\n\n\n\nLet me gather port and vlan information for switch: " + selected_switch_name() + ".\n"
+	
+def config_switch():
+	print '\nHere is a list of switches\n'
+	print_switches()
+	print "\nPlease enter switch a number.\n"
+	switch_num = raw_input(">>>>>>>>>>>")
+	
+	switch_name = selected_switch_name(switch_num)
 
-print '\nGathering interface information...\n'
-intf = switchconfig.get_intfs(switch_dict[switch_num])
-print '\nGathering VLAN information...\n'
-vlan = switchconfig.get_vlans(switch_dict[switch_num])
+	selected_switch_ip = switch_dict[switch_num]
 
-print 'Interfaces for %s:' % switch_dict[switch_num]
-for each in intf:
-	print '\t' + each
+	print "\n\n\n\nLet me gather port and vlan information for switch: " + selected_switch_name(switch_num) + ".\n"
 
-print '\nVLANs for %s:' % switch_dict[switch_num]
-for each in vlan:
-	print 'VLAN ID: ' + each[0] + '\tVLAN Name: ' + each[1]
-	print '=' * 40
+	print '\nGathering interface information...\n'
+	intf = switchconfig.get_intfs(switch_dict[switch_num])
+	print '\nGathering VLAN information...\n'
+	vlan = switchconfig.get_vlans(switch_dict[switch_num])
 
-print '\nHow many interfaces from the list would you like to configure?'
-intf_range = input('>')
+	print 'Interfaces for %s:' % switch_dict[switch_num]
+	for each in intf:
+		print '\t' + each
 
-intf_list = []
+	print '\nVLANs for %s:' % switch_dict[switch_num]
+	for each in vlan:
+		print 'VLAN ID: ' + each[0] + '\tVLAN Name: ' + each[1]
+		print '=' * 40
 
-for i in range(1, intf_range + 1):
-	print 'What interface from the list would you like to configure? One per line.'
-	intf_list.append(raw_input('%r.' % i))
+	print '\nHow many interfaces from the list would you like to configure?'
+	intf_range = input('>')
 
-print 'Which VLAN ID from the list would you like to add the selected port(s)?'
-vlan_input = raw_input('>')
+	intf_list = []
 
-print 'What descritpion would you like to add?'
-desc = raw_input('>')
+	for i in range(1, intf_range + 1):
+		print 'What interface from the list would you like to configure? One per line.'
+		intf_list.append(raw_input('%r.' % i))
 
-conf_in = {"switch_ip": switch_dict[switch_num], "intf_desc": desc, "intf_id": intf_list, "vlan_id": vlan_input  }
+	print 'Which VLAN ID from the list would you like to add the selected port(s)?'
+	vlan_input = raw_input('>')
 
-out = conf_intfs(conf_in)
-print "\n\nApplied configuration change:\n" + "=" * 40 + '\n' + out
+	print 'What descritpion would you like to add?'
+	desc = raw_input('>')
+
+	conf_in = {"switch_ip": switch_dict[switch_num], "intf_desc": desc, "intf_id": intf_list, "vlan_id": vlan_input  }
+
+	out = conf_intfs(conf_in)
+	print "\n\nApplied configuration change:\n" + "=" * 40 + '\n' + out
+
+
+
+
+
+
+
+
+def main():
+
+	print 'Please choose what you would like to do:\n'
+	
+	print '1.)  Modify config on a switch'
+	print '2.)  View the Audit Log'
+	print '3.)  Exit\n'
+	print "\nPlease enter a number.\n"
+	option = raw_input(">>>>>>>>>>>")
+	if option == '1':
+		config_switch()
+	elif option == '2':
+		print_log()
+	elif option == '3':
+		exit()
+	else:
+		print '\nBad input, try again\n\n\n\n'
+
+while True:
+	main()

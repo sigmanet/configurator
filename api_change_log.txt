@@ -1,14 +1,3 @@
-2015-12-03 02:12:26: 172.31.217.135: config t ; interface Ethernet1/3 ; switchport access vlan 31
-2015-12-03 02:12:26: 172.31.217.135: config t ; interface Ethernet1/3 ; description Configured by NX-API
-2015-12-03 02:12:27: 172.31.217.135: config t ; interface Ethernet1/4 ; switchport access vlan 31
-2015-12-03 02:12:27: 172.31.217.135: config t ; interface Ethernet1/4 ; description Configured by NX-API
-2015-12-03 03:16:49: N9K3: config t ; interface Ethernet1/3 ; switchport access vlan 31
-2015-12-03 03:16:49: N9K3: config t ; interface Ethernet1/3 ; description Configured by NX-API
-2015-12-03 03:16:50: N9K3: config t ; interface Ethernet1/4 ; switchport access vlan 31
-2015-12-03 03:16:50: N9K3: config t ; interface Ethernet1/4 ; description Configured by NX-API
-2015-12-03 03:20:04: N9K3: config t ; interface Ethernet1/3 ; switchport access vlan 31
-2015-12-03 03:20:04: N9K3(admin): config t ; interface Ethernet1/3 ; description Configured by NX-API
-2015-12-03 03:20:04: N9K3: config t ; interface Ethernet1/4 ; switchport access vlan 31
 2015-12-03 03:20:04: N9K3(admin): config t ; interface Ethernet1/4 ; description Configured by NX-API
 2015-12-03 03:20:36: N9K3(admin): config t ; interface Ethernet1/3 ; switchport access vlan 31
 2015-12-03 03:20:36: N9K3(admin): config t ; interface Ethernet1/3 ; description Configured by NX-API
@@ -32,3 +21,63 @@
 2015-12-03 05:00:19: N9K1(admin): config t ; interface Ethernet1/4 ; description Test 43
 2015-12-03 16:31:32: N9K1(admin): config t ; interface Ethernet1/45 ; switchport access vlan 42
 2015-12-03 16:31:32: N9K1(admin): config t ; interface Ethernet1/45 ; description Test1
+2015-12-03 17:00:55: N9K2(admin): config t ; interface Ethernet 2/4 ; switchport access vlan 10
+2015-12-03 17:00:55: N9K2(admin): config t ; interface Ethernet 2/4 ; description Testing1
+2015-12-03 17:00:56: N9K2(admin): config t ; interface Ethernet2/5 ; switchport access vlan 10
+2015-12-03 17:00:56: N9K2(admin): config t ; interface Ethernet2/5 ; description Testing1
+2015-12-03 17:08:21: N9K1(admin): config t ; interface Ethernet1/38 ; switchport access vlan 42
+2015-12-03 17:08:21: N9K1(admin): config t ; interface Ethernet1/38 ; description TEST2
+2015-12-03 17:21:32: N9K2(admin): config t ; interface Ethernet1/9 ; switchport access vlan 52
+2015-12-03 17:21:32: N9K2(admin): config t ; interface Ethernet1/9 ; description foobar
+2015-12-03 17:21:32: N9K2(admin): config t ; interface Ethernet1/10 ; switchport access vlan 52
+2015-12-03 17:21:32: N9K2(admin): config t ; interface Ethernet1/10 ; description foobar
+2015-12-03 17:21:42: N9K1(admin): config t ; interface Ethernet1/4 ; switchport access vlan 43
+2015-12-03 17:21:42: N9K1(admin): config t ; interface Ethernet1/4 ; description TM Test
+2015-12-03 17:21:57: N9K2(admin): config t ; interface Ethernet1/6 ; switchport access vlan 53
+2015-12-03 17:21:57: N9K2(admin): config t ; interface Ethernet1/6 ; description TEST3
+2015-12-03 17:21:58: N9K2(admin): config t ; interface Ethernet1/8 ; switchport access vlan 53
+2015-12-03 17:21:58: N9K2(admin): config t ; interface Ethernet1/8 ; description TEST3
+2015-12-03 17:21:58: N9K2(admin): config t ; interface Ethernet1/10 ; switchport access vlan 53
+2015-12-03 17:21:58: N9K2(admin): config t ; interface Ethernet1/10 ; description TEST3
+2015-12-03 17:27:24: N9K2(admin): config t ; interface Ethernet1/8 ; switchport access vlan 53
+2015-12-03 17:27:24: N9K2(admin): config t ; interface Ethernet1/8 ; description foobar
+2015-12-03 17:27:25: N9K2(admin): config t ; interface Ethernet1/9 ; switchport access vlan 53
+2015-12-03 17:27:25: N9K2(admin): config t ; interface Ethernet1/9 ; description foobar
+2015-12-03 17:27:26: N9K2(admin): config t ; interface Ethernet1/10 ; switchport access vlan 53
+2015-12-03 17:27:26: N9K2(admin): config t ; interface Ethernet1/10 ; description foobar
+2015-12-03 17:28:21: N9K1(admin): config t ; interface Ethernet1/5 ; switchport access vlan 41
+2015-12-03 17:28:21: N9K1(admin): config t ; interface Ethernet1/5 ; description TM Test
+2015-12-03 17:31:00: N9K1(admin): config t ; interface Ethernet1/8 ; switchport access vlan 43
+2015-12-03 17:31:00: N9K1(admin): config t ; interface Ethernet1/8 ; description sean test 2
+2015-12-03 17:31:00: N9K1(admin): config t ; interface Ethernet1/12 ; switchport access vlan 43
+2015-12-03 17:31:00: N9K1(admin): config t ; interface Ethernet1/12 ; description sean test 2
+2015-12-03 17:31:25: N9K3(admin): config t ; interface Ethernet1/11 ; switchport access vlan 34
+2015-12-03 17:31:25: N9K3(admin): config t ; interface Ethernet1/11 ; description sean test 3
+2015-12-03 17:31:26: N9K3(admin): config t ; interface Ethernet1/25 ; switchport access vlan 34
+2015-12-03 17:31:26: N9K3(admin): config t ; interface Ethernet1/25 ; description sean test 3
+2015-12-03 17:34:22: N9K4(admin): config t ; interface Ethernet1/12 ; switchport access vlan 61
+2015-12-03 17:34:22: N9K4(admin): config t ; interface Ethernet1/12 ; description testng 123
+2015-12-03 17:34:23: N9K4(admin): config t ; interface Ethernet1/14 ; switchport access vlan 61
+2015-12-03 17:34:23: N9K4(admin): config t ; interface Ethernet1/14 ; description testng 123
+2015-12-03 17:36:21: N9K2(admin): config t ; interface Ethernet1/6 ; switchport access vlan 52
+2015-12-03 17:36:21: N9K2(admin): config t ; interface Ethernet1/6 ; description test example 5
+2015-12-03 17:36:22: N9K2(admin): config t ; interface Ethernet1/12 ; switchport access vlan 52
+2015-12-03 17:36:22: N9K2(admin): config t ; interface Ethernet1/12 ; description test example 5
+2015-12-03 17:43:27: N9K1(admin): config t ; interface Ethernet1/45 ; switchport access vlan 42
+2015-12-03 17:43:27: N9K1(admin): config t ; interface Ethernet1/45 ; description TEST4
+2015-12-03 17:44:42: N9K2(admin): config t ; interface Ethernet1/35 ; switchport access vlan 51
+2015-12-03 17:44:42: N9K2(admin): config t ; interface Ethernet1/35 ; description TEST5
+2015-12-03 17:48:16: N9K3(admin): config t ; interface Ethernet1/7 ; switchport access vlan 33
+2015-12-03 17:48:16: N9K3(admin): config t ; interface Ethernet1/7 ; description foo
+2015-12-03 17:48:17: N9K3(admin): config t ; interface Ethernet1/8 ; switchport access vlan 33
+2015-12-03 17:48:17: N9K3(admin): config t ; interface Ethernet1/8 ; description foo
+2015-12-03 17:48:18: N9K3(admin): config t ; interface Ethernet1/9 ; switchport access vlan 33
+2015-12-03 17:48:18: N9K3(admin): config t ; interface Ethernet1/9 ; description foo
+2015-12-03 17:50:01: N9K2(admin): config t ; interface Ethernet1/7 ; switchport access vlan 52
+2015-12-03 17:50:01: N9K2(admin): config t ; interface Ethernet1/7 ; description test-7
+2015-12-03 17:50:02: N9K2(admin): config t ; interface Ethernet1/9 ; switchport access vlan 52
+2015-12-03 17:50:02: N9K2(admin): config t ; interface Ethernet1/9 ; description test-7
+2015-12-03 17:50:51: N9K3(admin): config t ; interface Ethernet1/7 ; switchport access vlan 32
+2015-12-03 17:50:51: N9K3(admin): config t ; interface Ethernet1/7 ; description TEST6
+2015-12-03 17:50:52: N9K3(admin): config t ; interface Ethernet1/8 ; switchport access vlan 32
+2015-12-03 17:50:52: N9K3(admin): config t ; interface Ethernet1/8 ; description TEST6

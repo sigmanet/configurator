@@ -10,7 +10,7 @@ def hello():
 def pickSwitch():
     return render_template('base.html',
                            pagetitle="choose a switch",
-                           leadtext="choose a switch to configure",
+                           leadtext="Choose a Switch to Configure",
                            content=getPickSwitchContent())
 
 @application.route("/pickports")
@@ -18,14 +18,12 @@ def pickPorts():
     ip = request.args.get('ip')
     return render_template('base.html',
                            pagetitle="choose ports",
-                           leadtext="choose ports to configure",
+                           leadtext="Choose the Ports to Configure on Switch %s (%s)" % (switchconfig.get_switchname(request.args.get('ip')), request.args.get('ip')),
                            content=getPickPortsContent(ip))
 
 @application.route("/postchange", methods = ['GET', 'POST'])
 def postChange():
     data = {}
-    data['foo'] = 'foo'
-    return "<H1>got to here</H1>"
     data['vlan_id'] = request.form['rtn_vlan']
     data['intf_id'] = request.form['rtn_ports'].split(",")
     data['intf_desc'] = request.form['desc']
@@ -35,7 +33,7 @@ def postChange():
     return render_template('base.html',
                            pagetitle="Config Confirmation",
                            leadtext="Congratulations! Your Interfaces Have Been Configured!",
-                           content="<p>The following configuration was applied to switch %s based on your reqest</p><br><pre>%s</pre>" % (request.form['rtn_switchip'], result))
+                           content="<p>The following configuration was applied to switch %s (%s) based on your reqest</p><br><pre class='text-left'>%s</pre>" % (switchconfig.get_switchname(request.form['rtn_switchip']), request.form['rtn_switchip'], result))
 
 
 @application.route("/auditlog")
@@ -58,7 +56,7 @@ def getPickSwitchContent():
     return rtn
 
 def getPickPortsContent(ipaddr):
-    rtn='''<form id="form1" action="/postchange" method="post"><input type="hidden" id="rtn_switchip"></input><input type="hidden" id="rtn_vlan"></input><input type="hidden" id="rtn_ports"></input><div class="form-group"><select multiple="multiple" size="10" name="duallistbox_demo1[]">'''
+    rtn='''<form id="form1" action="/postchange" method="post"><input type="hidden" name="rtn_switchip" id="rtn_switchip"><input type="hidden" name="rtn_vlan" id="rtn_vlan"><input type="hidden" name="rtn_ports" id="rtn_ports"><div class="form-group"><select multiple="multiple" size="10" name="duallistbox_demo1[]">'''
     
     interfaces = switchconfig.get_intfs(ipaddr)
     for intf in interfaces:
@@ -70,9 +68,9 @@ def getPickPortsContent(ipaddr):
     ddjs = ""
     for vlan in vlans:
         rtn += "<li><a href='#' id='vlan%s'>%s</a></li>" % (vlan[0], vlan[1])
-        ddjs += '$("#vlan%s").click(function(e){$("#rtn_vlan").val(%s); e.preventDefault(); }); ' % (vlan[0], vlan[0])
+        ddjs += '$("#vlan%s").click(function(e){$("#rtn_vlan").val(%s); $("#sel_vlan").val("%s (%s)"); e.preventDefault(); }); ' % (vlan[0], vlan[0], vlan[1], vlan[0])
     
-    rtn += '''</ul></div><br><br><label for="desc">Interface Description:</label><input type="text" class="form-control" name="desc" id="desc"></input></div><br><br><button type="submit" class="btn btn-default btn-block">Submit data</button></form><script>
+    rtn += '''</ul></div><br><br><label for="sel_vlan">Selected VLAN:</label><input readonly type="text" id="sel_vlan" class="form-control"><label for="desc">Interface Description:</label><input type="text" class="form-control" name="desc" id="desc"></div><br><br><button type="submit" class="btn btn-default btn-block">Submit data</button></form><script>
             var demo1 = $('select[name="duallistbox_demo1[]"]').bootstrapDualListbox();
 $("#form1").submit(function() {
       $('#rtn_switchip').val(getParameterByName('ip'));
